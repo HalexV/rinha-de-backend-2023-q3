@@ -27,4 +27,8 @@ export class InMemoryPeopleRepository implements PeopleRepository {
 
     return people
   }
+
+  async count(): Promise<number> {
+    return this.items.length
+  }
 }

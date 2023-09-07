@@ -5,7 +5,7 @@ import { FetchPeopleUseCase } from './fetch-people'
 let inMemoryPeopleRepository: InMemoryPeopleRepository
 let sut: FetchPeopleUseCase
 
-describe('Fetch person', () => {
+describe('Fetch people', () => {
   beforeEach(async () => {
     inMemoryPeopleRepository = new InMemoryPeopleRepository()
     sut = new FetchPeopleUseCase(inMemoryPeopleRepository)
