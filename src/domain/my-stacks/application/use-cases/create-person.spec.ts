@@ -12,7 +12,7 @@ describe('Create person', () => {
 
   it('should be able to create a person', async () => {
     const result = await sut.execute({
-      birthday: new Date('1995-04-30'),
+      birthdate: new Date('1995-04-30'),
       name: 'Halex Viotto Gomes',
       nickname: 'HalexV',
       stack: ['node', 'javascript'],

@@ -5,7 +5,7 @@ import { Person } from '../../enterprise/entities/person'
 interface CreatePersonUseCaseRequest {
   nickname: string
   name: string
-  birthday: Date
+  birthdate: Date
   stack: string[]
 }
 
@@ -21,12 +21,12 @@ export class CreatePersonUseCase {
 
   async execute({
     nickname,
-    birthday,
+    birthdate,
     name,
     stack,
   }: CreatePersonUseCaseRequest): Promise<CreatePersonUseCaseResponse> {
     const person = Person.create({
-      birthday,
+      birthdate,
       name,
       nickname,
       stack,

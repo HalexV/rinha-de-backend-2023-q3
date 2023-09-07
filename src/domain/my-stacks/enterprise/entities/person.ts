@@ -1,10 +1,10 @@
 import { Entity } from '@/core/entities/entity'
 import { UniqueEntityId } from '@/core/entities/unique-entity-id'
 
-interface PersonProps {
+export interface PersonProps {
   nickname: string
   name: string
-  birthday: Date
+  birthdate: Date
   stack: string[]
 }
 
@@ -17,8 +17,8 @@ export class Person extends Entity<PersonProps> {
     return this.props.name
   }
 
-  get birthday() {
-    return this.props.birthday
+  get birthdate() {
+    return this.props.birthdate
   }
 
   get stack() {
