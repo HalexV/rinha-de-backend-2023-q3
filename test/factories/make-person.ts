@@ -11,9 +11,9 @@ export function makePerson(
 ) {
   const person = Person.create(
     {
-      nickname: faker.internet.userName(),
-      birthdate: faker.date.birthdate(),
-      name: faker.person.fullName(),
+      apelido: faker.internet.userName(),
+      nascimento: faker.date.birthdate(),
+      nome: faker.person.fullName(),
       stack: [faker.word.noun(), faker.word.noun()],
       ...override,
     },

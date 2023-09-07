@@ -2,23 +2,23 @@ import { Entity } from '@/core/entities/entity'
 import { UniqueEntityId } from '@/core/entities/unique-entity-id'
 
 export interface PersonProps {
-  nickname: string
-  name: string
-  birthdate: Date
+  apelido: string
+  nome: string
+  nascimento: Date
   stack: string[]
 }
 
 export class Person extends Entity<PersonProps> {
-  get nickname() {
-    return this.props.nickname
+  get apelido() {
+    return this.props.apelido
   }
 
-  get name() {
-    return this.props.name
+  get nome() {
+    return this.props.nome
   }
 
-  get birthdate() {
-    return this.props.birthdate
+  get nascimento() {
+    return this.props.nascimento
   }
 
   get stack() {

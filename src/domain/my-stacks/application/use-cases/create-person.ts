@@ -3,9 +3,9 @@ import { PeopleRepository } from '../repositories/people-repository'
 import { Person } from '../../enterprise/entities/person'
 
 interface CreatePersonUseCaseRequest {
-  nickname: string
-  name: string
-  birthdate: Date
+  apelido: string
+  nome: string
+  nascimento: Date
   stack: string[]
 }
 
@@ -20,15 +20,15 @@ export class CreatePersonUseCase {
   constructor(private peopleRepository: PeopleRepository) {}
 
   async execute({
-    nickname,
-    birthdate,
-    name,
+    apelido,
+    nascimento,
+    nome,
     stack,
   }: CreatePersonUseCaseRequest): Promise<CreatePersonUseCaseResponse> {
     const person = Person.create({
-      birthdate,
-      name,
-      nickname,
+      nascimento,
+      nome,
+      apelido,
       stack,
     })
 

@@ -23,7 +23,7 @@ describe('Get person', () => {
     expect(result.isRight()).toBeTruthy()
 
     if (result.isRight()) {
-      expect(result.value.person.name).toEqual(newPerson.name)
+      expect(result.value.person.nome).toEqual(newPerson.nome)
     }
   })
 })
