@@ -1,6 +1,7 @@
-import { Either, right } from '@/core/either'
+import { Either, left, right } from '@/core/either'
 import { PeopleRepository } from '../repositories/people-repository'
 import { Person } from '../../enterprise/entities/person'
+import { PersonAlreadyExistsError } from './errors/person-already-exists-error'
 
 interface CreatePersonUseCaseRequest {
   apelido: string
@@ -10,7 +11,7 @@ interface CreatePersonUseCaseRequest {
 }
 
 type CreatePersonUseCaseResponse = Either<
-  null,
+  PersonAlreadyExistsError,
   {
     person: Person
   }
@@ -25,6 +26,13 @@ export class CreatePersonUseCase {
     nome,
     stack,
   }: CreatePersonUseCaseRequest): Promise<CreatePersonUseCaseResponse> {
+    const personWithSameApelido =
+      await this.peopleRepository.findByApelido(apelido)
+
+    if (personWithSameApelido) {
+      return left(new PersonAlreadyExistsError(apelido))
+    }
+
     const person = Person.create({
       nascimento,
       nome,

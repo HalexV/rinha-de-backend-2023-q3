@@ -18,6 +18,16 @@ export class InMemoryPeopleRepository implements PeopleRepository {
     return person
   }
 
+  async findByApelido(apelido: string): Promise<Person | null> {
+    const person = this.items.find((person) => person.apelido === apelido)
+
+    if (!person) {
+      return null
+    }
+
+    return person
+  }
+
   async findManyByQuery(query: string): Promise<Person[]> {
     const people = this.items.filter((person) => {
       const str = `${person.apelido} ${person.nome} ${person.stack.join(' ')}`
