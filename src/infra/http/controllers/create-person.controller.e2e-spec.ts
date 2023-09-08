@@ -100,11 +100,25 @@ describe('POST /pessoas (E2E)', () => {
   it('should not be able to create a person when nome is not a string', async () => {
     const response = await request(app.getHttpServer()).post('/pessoas').send({
       apelido: 'apelido',
-      nome: 1, // nome deve ser string e não número
+      nome: 1,
       nascimento: '1985-01-01',
       stack: null,
     })
 
+    expect(response.statusCode).toBe(400)
+  })
+
+  it('should not be able to create a person when some stack value is not a string', async () => {
+    const response = await request(app.getHttpServer())
+      .post('/pessoas')
+      .send({
+        apelido: 'apelido',
+        nome: 'nome',
+        nascimento: '1985-01-01',
+        stack: [1, 'PHP'],
+      })
+
+    console.dir(response.body, { depth: null })
     expect(response.statusCode).toBe(400)
   })
 })
