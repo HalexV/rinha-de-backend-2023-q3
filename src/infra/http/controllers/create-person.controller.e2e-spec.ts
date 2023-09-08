@@ -144,4 +144,15 @@ describe('POST /pessoas (E2E)', () => {
 
     expect(response.statusCode).toBe(400)
   })
+
+  it('should not be able to create a person when stack is an empty array', async () => {
+    const response = await request(app.getHttpServer()).post('/pessoas').send({
+      apelido: 'apelido',
+      nome: 'nome',
+      nascimento: '1985-01-01',
+      stack: [],
+    })
+
+    expect(response.statusCode).toBe(400)
+  })
 })
