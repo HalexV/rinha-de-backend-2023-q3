@@ -96,4 +96,15 @@ describe('POST /pessoas (E2E)', () => {
 
     expect(response.statusCode).toBe(422)
   })
+
+  it('should not be able to create a person when nome is not a string', async () => {
+    const response = await request(app.getHttpServer()).post('/pessoas').send({
+      apelido: 'apelido',
+      nome: 1, // nome deve ser string e não número
+      nascimento: '1985-01-01',
+      stack: null,
+    })
+
+    expect(response.statusCode).toBe(400)
+  })
 })
