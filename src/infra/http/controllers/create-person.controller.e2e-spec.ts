@@ -72,7 +72,17 @@ describe('POST /pessoas (E2E)', () => {
       stack: null,
     })
 
-    console.dir(response.body, { depth: null })
+    expect(response.statusCode).toBe(422)
+  })
+
+  it('should not be able to create a person when apelido is a null value', async () => {
+    const response = await request(app.getHttpServer()).post('/pessoas').send({
+      apelido: null,
+      nome: 'Ana Barbosa',
+      nascimento: '1985-01-23',
+      stack: null,
+    })
+
     expect(response.statusCode).toBe(422)
   })
 })
