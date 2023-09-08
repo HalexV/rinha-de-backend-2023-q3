@@ -118,7 +118,19 @@ describe('POST /pessoas (E2E)', () => {
         stack: [1, 'PHP'],
       })
 
-    console.dir(response.body, { depth: null })
+    expect(response.statusCode).toBe(400)
+  })
+
+  it('should not be able to create a person when nascimento is in a wrong format', async () => {
+    const response = await request(app.getHttpServer())
+      .post('/pessoas')
+      .send({
+        apelido: 'apelido',
+        nome: 'nome',
+        nascimento: '198-01-01',
+        stack: ['Nodejs', 'PHP'],
+      })
+
     expect(response.statusCode).toBe(400)
   })
 })
