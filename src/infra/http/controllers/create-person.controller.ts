@@ -18,7 +18,7 @@ const createPersonBodySchema = z.object({
     .max(10)
     .regex(/^\d\d\d\d-\d\d-\d\d$/)
     .transform((val) => new Date(val)),
-  stack: z.array(z.string().max(32)).min(1),
+  stack: z.array(z.string().max(32)).min(1).nullable(),
 })
 
 const bodyValidationPipe = new ZodValidationPipe(createPersonBodySchema)
