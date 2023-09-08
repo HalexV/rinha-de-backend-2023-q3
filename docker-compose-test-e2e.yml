@@ -1,0 +1,12 @@
+version: '3.5'
+
+services:
+  postgres:
+    container_name: nest-rinha-backend-pg
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: nest-rinha-backend

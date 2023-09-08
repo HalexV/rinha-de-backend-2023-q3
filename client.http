@@ -1,0 +1,13 @@
+@baseUrl = http://localhost:3333
+
+# @name create_person
+POST {{baseUrl}}/pessoas
+Content-Type: application/json
+
+{
+  "apelido" : "josé",
+  "nome" : "José Roberto",
+  "nascimento" : "2000-10-01",
+  "stack" : ["C#", "Node", "Oracle"]
+}
+

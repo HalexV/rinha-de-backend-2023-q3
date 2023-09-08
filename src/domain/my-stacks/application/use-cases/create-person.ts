@@ -2,6 +2,7 @@ import { Either, left, right } from '@/core/either'
 import { PeopleRepository } from '../repositories/people-repository'
 import { Person } from '../../enterprise/entities/person'
 import { PersonAlreadyExistsError } from './errors/person-already-exists-error'
+import { Injectable } from '@nestjs/common'
 
 interface CreatePersonUseCaseRequest {
   apelido: string
@@ -16,7 +17,7 @@ type CreatePersonUseCaseResponse = Either<
     person: Person
   }
 >
-
+@Injectable()
 export class CreatePersonUseCase {
   constructor(private peopleRepository: PeopleRepository) {}
 
