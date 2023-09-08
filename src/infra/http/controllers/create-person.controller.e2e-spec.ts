@@ -41,4 +41,26 @@ describe('POST /pessoas (E2E)', () => {
 
     expect(personOnDatabase).toBeTruthy()
   })
+
+  it('should not be able to create a person with same apelido', async () => {
+    await request(app.getHttpServer())
+      .post('/pessoas')
+      .send({
+        apelido: 'josé',
+        nome: 'José Roberto',
+        nascimento: '2000-10-01',
+        stack: ['C#', 'Node', 'Oracle'],
+      })
+
+    const response = await request(app.getHttpServer())
+      .post('/pessoas')
+      .send({
+        apelido: 'josé',
+        nome: 'José Roberto',
+        nascimento: '2000-10-01',
+        stack: ['C#', 'Node', 'Oracle'],
+      })
+
+    expect(response.statusCode).toBe(422)
+  })
 })

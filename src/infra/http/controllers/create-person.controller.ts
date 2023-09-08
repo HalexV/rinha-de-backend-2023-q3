@@ -1,10 +1,10 @@
 import { CreatePersonUseCase } from '@/domain/my-stacks/application/use-cases/create-person'
 import {
-  BadRequestException,
   Body,
   Controller,
   Post,
   Res,
+  UnprocessableEntityException,
 } from '@nestjs/common'
 import { z } from 'zod'
 import { ZodValidationPipe } from '../pipes/zod-validation-pipe'
@@ -44,7 +44,7 @@ export class CreatePersonController {
     })
 
     if (result.isLeft()) {
-      throw new BadRequestException(result.value)
+      throw new UnprocessableEntityException(result.value.message)
     }
 
     res.header('location', `/pessoas/${result.value.person.id}`)
