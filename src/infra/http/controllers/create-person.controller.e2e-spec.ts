@@ -85,4 +85,15 @@ describe('POST /pessoas (E2E)', () => {
 
     expect(response.statusCode).toBe(422)
   })
+
+  it('should not be able to create a person when nascimento is a null value', async () => {
+    const response = await request(app.getHttpServer()).post('/pessoas').send({
+      apelido: 'ana',
+      nome: 'Ana Barbosa',
+      nascimento: null,
+      stack: null,
+    })
+
+    expect(response.statusCode).toBe(422)
+  })
 })
