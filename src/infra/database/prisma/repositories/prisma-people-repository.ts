@@ -44,8 +44,34 @@ export class PrismaPersonRepository implements PeopleRepository {
     return PrismaPersonMapper.toDomain(person)
   }
 
-  findManyByQuery(query: string): Promise<Person[]> {
-    throw new Error('Method not implemented.')
+  async findManyByQuery(query: string): Promise<Person[]> {
+    const people = await this.prisma.person.findMany({
+      where: {
+        OR: [
+          {
+            apelido: {
+              contains: query,
+              mode: 'insensitive',
+            },
+          },
+          {
+            nome: {
+              contains: query,
+              mode: 'insensitive',
+            },
+          },
+          {
+            stack: {
+              contains: query,
+              mode: 'insensitive',
+            },
+          },
+        ],
+      },
+      take: 50,
+    })
+
+    return people.map(PrismaPersonMapper.toDomain)
   }
 
   count(): Promise<number> {

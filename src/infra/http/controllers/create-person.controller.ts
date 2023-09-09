@@ -7,8 +7,8 @@ import {
   UnprocessableEntityException,
 } from '@nestjs/common'
 import { z } from 'zod'
-import { ZodValidationPipe } from '../pipes/zod-validation-pipe'
 import { FastifyReply } from 'fastify'
+import { ZodValidationPipeToCreatePerson } from '../pipes/zod-validation-pipe-to-create-person'
 
 const createPersonBodySchema = z.object({
   apelido: z.string().max(32),
@@ -21,7 +21,9 @@ const createPersonBodySchema = z.object({
   stack: z.array(z.string().max(32)).min(1).nullable(),
 })
 
-const bodyValidationPipe = new ZodValidationPipe(createPersonBodySchema)
+const bodyValidationPipe = new ZodValidationPipeToCreatePerson(
+  createPersonBodySchema,
+)
 
 type CreatePersonBodySchema = z.infer<typeof createPersonBodySchema>
 
