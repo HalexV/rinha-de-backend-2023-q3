@@ -11,3 +11,8 @@ Content-Type: application/json
   "stack" : ["C#", "Node", "Oracle"]
 }
 
+###
+
+# @name get_person
+GET {{baseUrl}}/pessoas/579c5c91-a8ef-401e-9f3c-020b3a73d52a
+Content-Type: application/json

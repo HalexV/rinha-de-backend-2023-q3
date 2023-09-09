@@ -40,7 +40,7 @@ export class CreatePersonController {
       apelido,
       nascimento,
       nome,
-      stack,
+      stack: stack ?? [],
     })
 
     if (result.isLeft()) {

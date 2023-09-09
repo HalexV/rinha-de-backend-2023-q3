@@ -16,8 +16,18 @@ export class PrismaPersonRepository implements PeopleRepository {
     })
   }
 
-  findById(id: string): Promise<Person | null> {
-    throw new Error('Method not implemented.')
+  async findById(id: string): Promise<Person | null> {
+    const person = await this.prisma.person.findUnique({
+      where: {
+        id,
+      },
+    })
+
+    if (!person) {
+      return null
+    }
+
+    return PrismaPersonMapper.toDomain(person)
   }
 
   async findByApelido(apelido: string): Promise<Person | null> {
