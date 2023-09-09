@@ -6,6 +6,8 @@ import { GetPersonController } from './controllers/get-person.controller'
 import { GetPersonUseCase } from '@/domain/my-stacks/application/use-cases/get-person'
 import { FetchPeopleController } from './controllers/fetch-people.controller'
 import { FetchPeopleUseCase } from '@/domain/my-stacks/application/use-cases/fetch-people'
+import { CountPeopleController } from './controllers/count-people.controller'
+import { CountPeopleUseCase } from '@/domain/my-stacks/application/use-cases/count-people'
 
 @Module({
   imports: [DatabaseModule],
@@ -13,7 +15,13 @@ import { FetchPeopleUseCase } from '@/domain/my-stacks/application/use-cases/fet
     CreatePersonController,
     GetPersonController,
     FetchPeopleController,
+    CountPeopleController,
   ],
-  providers: [CreatePersonUseCase, GetPersonUseCase, FetchPeopleUseCase],
+  providers: [
+    CreatePersonUseCase,
+    GetPersonUseCase,
+    FetchPeopleUseCase,
+    CountPeopleUseCase,
+  ],
 })
 export class HttpModule {}

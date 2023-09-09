@@ -74,7 +74,7 @@ export class PrismaPersonRepository implements PeopleRepository {
     return people.map(PrismaPersonMapper.toDomain)
   }
 
-  count(): Promise<number> {
-    throw new Error('Method not implemented.')
+  async count(): Promise<number> {
+    return await this.prisma.person.count()
   }
 }
