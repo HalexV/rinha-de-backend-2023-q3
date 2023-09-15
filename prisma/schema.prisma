@@ -1,10 +1,12 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [pg_trgm]
 }
 
 model Person {
@@ -13,6 +15,8 @@ model Person {
   nome       String   @db.VarChar(100)
   nascimento DateTime
   stack      String?
+  searchable String?
 
+  @@index([searchable(ops: raw("gist_trgm_ops (siglen='64')"))], type: Gist)
   @@map("people")
 }

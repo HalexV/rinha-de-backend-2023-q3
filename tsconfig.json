@@ -4,11 +4,12 @@
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "target": "es2022",
     "sourceMap": true,
-    "outDir": "./dist",
+    "outDir": "./dist/src",
     "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,
@@ -22,5 +23,6 @@
       "@/*": ["./src/*"]
     },
     "types": ["vitest/globals"]
-  }
+  },
+  "exclude": ["node_modules"]
 }
