@@ -27,3 +27,47 @@ Tentar extrair o máximo de performance baseado na rinha de backend 2023 utiliza
 - Unit Tests
 - End-to-end Tests
 - Etc.
+
+### Script
+
+Instalar o projeto:
+
+- npm ci
+
+Rodar local:
+É necessário subir o container do banco:
+
+- docker compose -f docker-compose-test-e2e.yml
+- npx prisma migrate deploy, para aplicar as migrations
+- npm run start:dev para iniciar a aplicação de forma local
+
+Rodar testes unitários:
+
+- npm run test ou test:watch
+
+Rodar os testes E2E:
+
+- npm run test:e2e
+  !AVISO! A suíte e2e está dando erros por conta do prisma e não sei como resolver isso ainda.
+
+Rodar os containers para o teste:
+
+- docker compose up
+
+Quaisquer alterações no código do projeto precisam ser buildadas com npm run build.
+
+!AVISO!
+
+- O prisma atualmente não oferece funcionalidades para criar colunas computadas no banco de dados através do prisma schema.
+- Uma forma de resolver isso é editar a migration que é gerada e adicionar os comandos para gerar esse tipo de coluna.
+- Atualmente, no momento de usar o npx prisma migrate dev, o prisma fica gerando uma nova migration para dropar essa coluna computada do banco e remover e adicionar de novo o índice criado para o searchable.
+- Não sei porque isso está ocorrendo.
+
+Alguns lugares que eu consultei:
+
+- https://github.com/nikolasburk/generated-columns
+- https://github.com/prisma/prisma/issues/6336
+- https://github.com/prisma/prisma/issues/3394
+- https://www.prisma.io/docs/concepts/components/prisma-schema/postgresql-extensions
+
+É, os caras tem issue sobre esses problemas abertos há mais de dois anos.
