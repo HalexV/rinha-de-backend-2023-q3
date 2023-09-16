@@ -8,6 +8,8 @@
 - Prisma
 - PostgreSQL
 
+Algumas configurações foram baseadas neste repositório https://github.com/lukas8219/rinha-be-2023-q3
+
 ### Fase de otimização
 
 - Por enquanto está ruim.
