@@ -8,7 +8,7 @@ export class PrismaService
 {
   constructor() {
     super({
-      log: ['warn', 'error', 'query', 'info'],
+      log: ['info', 'error', 'warn'],
     })
   }
 
