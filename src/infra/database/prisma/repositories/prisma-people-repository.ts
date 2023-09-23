@@ -45,7 +45,6 @@ export class PrismaPersonRepository implements PeopleRepository {
   }
 
   async findManyByQuery(query: string): Promise<Person[]> {
-    console.time()
     const people = await this.prisma.person.findMany({
       where: {
         searchable: {
@@ -55,7 +54,7 @@ export class PrismaPersonRepository implements PeopleRepository {
       },
       take: 50,
     })
-    console.timeEnd()
+
     return people.map(PrismaPersonMapper.toDomain)
   }
 
