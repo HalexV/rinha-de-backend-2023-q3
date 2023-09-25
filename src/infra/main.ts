@@ -15,7 +15,7 @@ async function bootstrap() {
 
   const envService = app.get(EnvService)
   const port = envService.get('PORT')
-  console.log(`${process.pid} started`)
+  console.log(`Process ${process.pid} started`)
   await app.listen(port, '0.0.0.0')
 }
 
