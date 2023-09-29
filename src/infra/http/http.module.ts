@@ -8,7 +8,7 @@ import { FetchPeopleController } from './controllers/fetch-people.controller'
 import { FetchPeopleUseCase } from '@/domain/my-stacks/application/use-cases/fetch-people'
 import { CountPeopleController } from './controllers/count-people.controller'
 import { CountPeopleUseCase } from '@/domain/my-stacks/application/use-cases/count-people'
-import { GetPrismaMetricsController } from './controllers/get-prisma-metrics.controller'
+// import { GetPrismaMetricsController } from './controllers/get-prisma-metrics.controller'
 
 @Module({
   imports: [DatabaseModule],
@@ -17,7 +17,7 @@ import { GetPrismaMetricsController } from './controllers/get-prisma-metrics.con
     GetPersonController,
     FetchPeopleController,
     CountPeopleController,
-    GetPrismaMetricsController,
+    // GetPrismaMetricsController,
   ],
   providers: [
     CreatePersonUseCase,

@@ -1,16 +1,16 @@
 import { Module } from '@nestjs/common'
-import { PrismaService } from './prisma/prisma.service'
 import { PeopleRepository } from '@/domain/my-stacks/application/repositories/people-repository'
-import { PrismaPersonRepository } from './prisma/repositories/prisma-people-repository'
+import { PgDriverService } from './pg-driver/pg-driver.service'
+import { PgDriverPersonRepository } from './pg-driver/repositories/pg-driver-people-repository'
 
 @Module({
   providers: [
-    PrismaService,
+    PgDriverService,
     {
       provide: PeopleRepository,
-      useClass: PrismaPersonRepository,
+      useClass: PgDriverPersonRepository,
     },
   ],
-  exports: [PrismaService, PeopleRepository],
+  exports: [PgDriverService, PeopleRepository],
 })
 export class DatabaseModule {}

@@ -1,10 +1,7 @@
 import 'dotenv/config'
 
-import { PrismaClient } from '@prisma/client'
+import { Pool } from 'pg'
 import { randomUUID } from 'node:crypto'
-import { execSync } from 'node:child_process'
-
-const prisma = new PrismaClient()
 
 function generateUniqueDatabaseURL(schemaId: string) {
   if (!process.env.DATABASE_URL) {
@@ -12,9 +9,7 @@ function generateUniqueDatabaseURL(schemaId: string) {
   }
 
   const url = new URL(process.env.DATABASE_URL)
-
   url.searchParams.set('schema', schemaId)
-
   return url.toString()
 }
 
@@ -24,13 +19,21 @@ beforeAll(async () => {
   const databaseURL = generateUniqueDatabaseURL(schemaId)
 
   process.env.DATABASE_URL = databaseURL
-
-  execSync('npx prisma migrate deploy')
-
-  await prisma.$connect()
+  process.env.DATABASE_SCHEMA = schemaId
 })
 
 afterAll(async () => {
-  await prisma.$executeRawUnsafe(`DROP SCHEMA IF EXISTS "${schemaId}" CASCADE`)
-  await prisma.$disconnect()
+  const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    max: Number(process.env.DB_POOL),
+    idleTimeoutMillis: 0,
+    connectionTimeoutMillis: 10000,
+  })
+
+  const client = await pool.connect()
+  client.release()
+
+  await pool.query(`DROP SCHEMA IF EXISTS "${schemaId}" CASCADE`)
+
+  await pool.end()
 })

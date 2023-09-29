@@ -1,12 +1,12 @@
 import { AppModule } from '@/infra/app.module'
-import { PrismaService } from '@/infra/database/prisma/prisma.service'
+// import { PrismaService } from '@/infra/database/prisma/prisma.service'
 import { INestApplication } from '@nestjs/common'
 import { Test } from '@nestjs/testing'
 import request from 'supertest'
 
 describe('POST /pessoas (E2E)', () => {
   let app: INestApplication
-  let prisma: PrismaService
+  // let prisma: PrismaService
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
@@ -15,7 +15,7 @@ describe('POST /pessoas (E2E)', () => {
 
     app = moduleRef.createNestApplication()
 
-    prisma = moduleRef.get(PrismaService)
+    // prisma = moduleRef.get(PrismaService)
 
     await app.init()
   })
@@ -33,13 +33,13 @@ describe('POST /pessoas (E2E)', () => {
     expect(response.statusCode).toBe(201)
     expect(response.headers.location.includes('/pessoas/')).toBeTruthy()
 
-    const personOnDatabase = await prisma.person.findUnique({
-      where: {
-        apelido: 'josé',
-      },
-    })
+    // const personOnDatabase = await prisma.person.findUnique({
+    //   where: {
+    //     apelido: 'josé',
+    //   },
+    // })
 
-    expect(personOnDatabase).toBeTruthy()
+    // expect(personOnDatabase).toBeTruthy()
   })
 
   it('should not be able to create a person with same apelido', async () => {

@@ -18,6 +18,7 @@ export const envSchema = z.object({
     .optional(),
   CLUSTER_WORKERS: z.coerce.number().default(1),
   PORT: z.coerce.number().optional().default(3333),
+  DB_POOL: z.coerce.number(),
 })
 
 export type Env = z.infer<typeof envSchema>
