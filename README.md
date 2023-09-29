@@ -14,9 +14,9 @@ Algumas configurações foram baseadas neste repositório https://github.com/luk
 
 - Utilizando as mesmas configurações de docker compose da versão do [PG Driver](https://github.com/HalexV/rinha-de-backend-2023-q3/tree/replace-prisma-with-pg-driver) os resultados utilizando o Prisma foram bem inferiores.
 
-- O principal problema que identifiquei com o Prisma foi ele não utilizar novas conexões na pool até atingir o limite configurado na fase em que as quantidade de requests é massiva. Não sei por que ele se comporta assim, desta forma utilizando poucas conexões com o banco de dados postgres, começam a ocorrer timeouts de queries tentando pegar uma nova conexão no pool de conexões.
+- O principal problema que identifiquei com o Prisma foi ele não utilizar novas conexões na pool até atingir o limite configurado, na fase em que a quantidade de requests é massiva. Não sei por que ele se comporta assim, desta forma utilizando poucas conexões com o banco de dados postgres, começam a ocorrer timeouts de queries tentando pegar uma nova conexão no pool de conexões.
 
-- Para tentar identificar o problema, acabei utilizando o pgHero para verificar a quantidade de conexões abertas com o postgres e implementei uma rota para pegar as métricas do prisma (`/prisma/metrics``). Logo abaixo está uma métrica do prisma que eu peguei no momento da quantidade requests massivas (utilizando uma configuração simples do docker para verificar esse comportamento) do teste. Perceba que existe um campo indicando a quantidade de queries esperando uma conexão, a quantidade de conexões abertas e a quantidade de conexões ociosas. Veja que existem muitas queries querendo uma conexão e um monte de conexões ociosas, que de alguma forma, não são distribuídas.
+- Para tentar identificar o problema, acabei utilizando o pgHero para verificar a quantidade de conexões abertas com o postgres e implementei uma rota para pegar as métricas do prisma (`/prisma/metrics``). Logo abaixo está uma métrica do prisma que eu peguei no momento do teste em que a quantidade de requests estava massiva. Perceba que existe um campo indicando a quantidade de queries esperando uma conexão, a quantidade de conexões abertas e a quantidade de conexões ociosas. Veja que existem muitas queries querendo uma conexão e um monte de conexões ociosas, que de alguma forma, não são distribuídas.
 
 ```json
 {
@@ -193,6 +193,7 @@ Instalar o projeto:
 - npm ci
 
 Rodar local:
+
 É necessário subir o container do banco:
 
 - docker compose -f docker-compose-test-e2e.yml
