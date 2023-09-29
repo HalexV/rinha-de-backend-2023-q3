@@ -1,27 +1,34 @@
-# Rinha BE 2023 - Q3 @HalexViotto/@HalexV
+# Rinha BE 2023 - Q3 @HalexViotto/@HalexV - Versão usando PG Driver
 
 ### Tecnologias usadas:
 
 - Node
 - Nest
 - Fastify
-- Prisma
+- ~~Prisma~~
+- PG Driver (driver do postgres para node)
 - PostgreSQL
 
 Algumas configurações foram baseadas neste repositório https://github.com/lukas8219/rinha-be-2023-q3
 
 ### Fase de otimização
 
-- Por enquanto está ruim.
+- Consegui um resultado satisfatório.
+- Segue abaixo as imagens do resultado do gatling.
+
+![](./pics/melhor-resultado-gatling-1.png)
+![](./pics/melhor-resultado-gatling-2.png)
+![](./pics/melhor-resultado-gatling-3.png)
+![](./pics/melhor-resultado-gatling-4.png)
 
 ### Objetivo
 
-Tentar extrair o máximo de performance baseado na rinha de backend 2023 utilizando as firulas para desenvolvimento de software, tais como:
+Tentar extrair o máximo de performance baseado na rinha de backend 2023 utilizando as ~~firulas~~ técnicas recomendadas para desenvolvimento de software, tais como:
 
 - DDD
 - SOLID
 - Frameworks
-- ORM
+- ~~ORM~~
 - Typescript
 - ESlint
 - Prettier
@@ -40,7 +47,6 @@ Rodar local:
 É necessário subir o container do banco:
 
 - docker compose -f docker-compose-test-e2e.yml
-- npx prisma migrate deploy, para aplicar as migrations
 - npm run start:dev para iniciar a aplicação de forma local
 
 Rodar testes unitários:
@@ -50,13 +56,15 @@ Rodar testes unitários:
 Rodar os testes E2E:
 
 - npm run test:e2e
-  !AVISO! A suíte e2e está dando erros por conta do prisma e não sei como resolver isso ainda.
+  ~~!AVISO! A suíte e2e está dando erros por conta do prisma e não sei como resolver isso ainda.~~
+  Resolvido. Configurei a suíte de testes E2E para rodar de forma sequêncial.
 
 Rodar os containers para o teste:
 
+- npm run build
 - docker compose up
 
-Quaisquer alterações no código do projeto precisam ser buildadas com npm run build.
+Quaisquer alterações no código do projeto precisam ser buildadas com npm run build novamente e apagar as imagens criadas pelo comando de `compose up` com `docker image rm` e os nomes das imagens criadas. A última parte serve para que as imagens sejam geradas do zero novamente contendo as alterações realizadas.
 
 !AVISO!
 

@@ -19,7 +19,8 @@ export class PgDriverService
     const client = await this.connect()
     client.release()
 
-    await this.query(`
+    try {
+      await this.query(`
     CREATE SCHEMA IF NOT EXISTS "${process.env.DATABASE_SCHEMA ?? 'public'}";
 
     CREATE EXTENSION IF NOT EXISTS "pg_trgm";
@@ -52,6 +53,7 @@ export class PgDriverService
       process.env.DATABASE_SCHEMA ?? 'public'
     }"."people" USING GIST ("searchable" gist_trgm_ops (siglen='64'));
     `)
+    } catch (error) {}
 
     return this
   }
