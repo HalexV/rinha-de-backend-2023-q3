@@ -21,6 +21,17 @@ Algumas configurações foram baseadas neste repositório https://github.com/luk
 ![](./pics/melhor-resultado-gatling-3.png)
 ![](./pics/melhor-resultado-gatling-4.png)
 
+---
+
+#### Update 1
+
+- Aplicando as mudanças que o @akitaonrails enviou para o [repositório](https://github.com/lukas8219/rinha-be-2023-q3/pull/2/files) do @lukas8219, consegui obter melhores resultados. Segue abaixo as imagens:
+
+![](./pics/melhor-resultado-atualizado-1-gatling-1.png)
+![](./pics/melhor-resultado-atualizado-1-gatling-2.png)
+![](./pics/melhor-resultado-atualizado-1-gatling-3.png)
+![](./pics/melhor-resultado-atualizado-1-gatling-4.png)
+
 ### Objetivo
 
 Tentar extrair o máximo de performance baseado na rinha de backend 2023 utilizando as ~~firulas~~ técnicas recomendadas para desenvolvimento de software, tais como:

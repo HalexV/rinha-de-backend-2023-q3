@@ -4,15 +4,16 @@ services:
     build: .
     hostname: app1
     environment:
-      DATABASE_URL: 'postgres://postgres:12345678@postgres:5432/postgres'
+      DATABASE_URL: 'postgres://postgres:12345678@localhost:5432/postgres'
       DB_POOL: 43
       PORT: '8080'
       CLUSTER: true
       CLUSTER_WORKERS: 5
-    expose:
-      - '8080'
+    # expose:
+    #   - '8080'
     # ports:
     #   - 9999:9999
+    network_mode: host
     depends_on:
       postgres:
         condition: service_healthy
@@ -29,16 +30,23 @@ services:
   app2:
     <<: *app
     hostname: app2
+    environment:
+      DATABASE_URL: 'postgres://postgres:12345678@localhost:5432/postgres'
+      DB_POOL: 43
+      PORT: '8081'
+      CLUSTER: true
+      CLUSTER_WORKERS: 5
 
   postgres:
     image: postgres
-    command: postgres -c 'max_connections=450' -c 'log_error_verbosity=terse' -c 'config_file=/etc/postgresql/postgresql.conf'
+    command: postgres -c 'max_connections=450' -c 'log_error_verbosity=terse' -c 'config_file=/etc/postgresql/postgresql.conf' -c 'client_min_messages=error'
     environment:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 12345678
-    ports:
-      - 5432:5432
+    network_mode: host
+    # ports:
+    #   - 5432:5432
     volumes:
       - ./postgresql.conf:/etc/postgresql/postgresql.conf
     healthcheck:
@@ -60,8 +68,9 @@ services:
     depends_on:
       - app1
       - app2
-    ports:
-      - '9999:9999'
+    network_mode: host
+    # ports:
+    #   - '9999:9999'
     ulimits:
       nproc: 1000000
       nofile:
